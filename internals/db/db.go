@@ -11,6 +11,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// TODO: Change context type from TODO
+
 func createDbConnection() *mongo.Client {
 	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
 
