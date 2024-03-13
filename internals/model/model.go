@@ -5,8 +5,3 @@ type User struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
-
-type DbEnvs struct {
-	DbName    string
-	DbUserCol string
-}
