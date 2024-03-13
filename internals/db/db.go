@@ -42,11 +42,12 @@ func FindOne(filter interface{}) model.User {
 		}
 	}()
 
-	envs := utils.PrepareDbEnvs()
-
 	var result model.User
 
-	err := client.Database(envs.DbName).Collection(envs.DbUserCol).FindOne(context.TODO(), filter).Decode(&result)
+	dbName := os.Getenv("DB_NAME")
+	dbUserCol := os.Getenv("DB_USER_COLLECTION")
+
+	err := client.Database(dbName).Collection(dbUserCol).FindOne(context.TODO(), filter).Decode(&result)
 
 	if err != nil {
 		log.Panicf("Failed to retrieve document")
@@ -64,9 +65,10 @@ func InsertOne(filter interface{}) {
 		}
 	}()
 
-	envs := utils.PrepareDbEnvs()
+	dbName := os.Getenv("DB_NAME")
+	dbUserCol := os.Getenv("DB_USER_COLLECTION")
 
-	_, err := client.Database(envs.DbName).Collection(envs.DbUserCol).InsertOne(context.TODO(), filter)
+	_, err := client.Database(dbName).Collection(dbUserCol).InsertOne(context.TODO(), filter)
 
 	if err != nil {
 		log.Panicf("Failed to insert document")
